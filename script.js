@@ -1,3 +1,5 @@
+//OBJECTIVES : Handle the local storage for the to do list.
+
 const notesBtn = document.getElementById('notes-btn');
 const todoBtn = document.getElementById('todo-btn');
 const displayArea = document.querySelector('.container');
@@ -36,7 +38,6 @@ function checkValues(inputArray, instructArray, errorString) {
     const totalInputs = inputArray.length;
 
     for (let i = 0; i < totalInputs; i++) {
-        console.log(inputArray[i]);
         if (inputArray[i].textContent === '') {
             alert(`ERROR encountered as : ${errorString}`);
             let newInput = '';
@@ -56,6 +57,113 @@ function checkValues(inputArray, instructArray, errorString) {
         }
     }
     return 0;
+}
+
+//Function to add data for the new note to the localStorage
+function addNoteToLocal(newObject){
+    //Why this function is giving error?
+    let notesData = JSON.parse(localStorage.getItem("notesData")) || [];
+    notesData.push(newObject);
+    localStorage.setItem("notesData", JSON.stringify(notesData));
+}
+
+//Function to edit the note card data to the local storage.
+function editLocalStorage(prevNoteTitle, prevNoteContent, newNoteTitle, newNoteContent){
+    let notesData = JSON.parse(localStorage.getItem("notesData")) || [];
+    for(let i = 0; i < notesData.length; i++){
+        // Logging the values being compared
+        console.log(`Comparing Titles: "${notesData[i].noteTitle}" === "${prevNoteTitle}"`);
+        console.log(`Comparing Contents: "${notesData[i].noteContent}" === "${prevNoteContent}"`);
+
+        //The below if statement never satisfy.
+        if((notesData[i].noteTitle === prevNoteTitle) && (notesData[i].noteContent === prevNoteContent)){
+            notesData[i].noteTitle = newNoteTitle;
+            notesData[i].noteContent = newNoteContent;
+            break;
+        }
+    }
+
+    localStorage.setItem("notesData", JSON.stringify(notesData));
+}
+
+//Function to remove the data from the localStorage.
+function removeFromLocal(noteTitle, noteContent){
+    let notesData = JSON.parse(localStorage.getItem("notesData")) || [];
+    let index;
+    
+    //Finding out the index of the note to be removed.
+    for(let i = 0; i < notesData.length; i++){
+        if(notesData[i].noteTitle === noteTitle && notesData[i].noteContent === noteContent){
+            index = i;
+            break;
+        }
+    }
+
+    if(index > -1){
+        notesData.splice(index, 1);
+    }
+
+    localStorage.setItem("notesData", JSON.stringify(notesData));
+}
+
+//Function to create a new note element.
+function createNewNoteCard(parentElement, notesTitle, notesContent){
+    const notesCard = document.createElement('div');
+    notesCard.className = 'notesCard';
+    notesCard.innerHTML = `
+    <h3>${notesTitle}</h3>
+    <p>${notesContent}</p>
+    <div class="btn-controls">
+        <i class="fa-solid fa-trash removeBtn"></i>
+        <i class="fa-solid fa-pen-to-square editBtn"></i>
+    </div>
+    `
+
+    const removeBtn = notesCard.querySelector('.removeBtn');
+    const editBtn = notesCard.querySelector('.editBtn');
+
+    removeBtn.addEventListener('click', function () {
+        const targetElement = (removeBtn.parentElement).parentElement;
+        parentElement.removeChild(targetElement);
+        notesTitle = ((removeBtn.parentElement).previousElementSibling).previousElementSibling;
+        notesContent = (removeBtn.parentElement).previousElementSibling;
+        removeFromLocal(notesTitle.textContent, notesContent.textContent);
+    })
+
+    editBtn.addEventListener('click', function () {
+        const newTitle = prompt('Enter the new title : ');
+        const newContent = prompt('Enter the new content : ');
+
+        const title = notesCard.querySelector('h3');
+        const content = notesCard.querySelector('p');
+
+        const prevTitle = title.textContent;
+        const prevContent = content.textContent;
+
+        title.textContent = newTitle;
+        content.textContent = newContent;
+        let InputStatus = checkValues([title, content], ['Enter the new title', 'Enter the new content'], 'Values cannot be null.');
+
+        if (InputStatus === 1) {
+            const targetElement = (removeBtn.parentElement).parentElement;
+            parentElement.removeChild(targetElement);
+            removeFromLocal(prevTitle, prevContent);
+        }
+        else{
+            editLocalStorage(prevTitle, prevContent, newTitle, newContent);
+        }
+    })
+
+    parentElement.appendChild(notesCard);
+}
+
+//Function to return an object that contains information of the local notes data.
+function getLocalStorageData(){
+    const localData = JSON.parse(localStorage.getItem('notesData')) || [];
+    if(localData.length > 0){
+        return localData;
+    }
+    return false;
 }
 
 let errorStatus = 0;
@@ -79,62 +187,38 @@ notesBtn.addEventListener('click', function () {
     notesBox.className = 'notesBox';
     displayArea.appendChild(notesBox);
 
+    //Generating the NoteCards for the data already present in localStorage.
+    let localStorageData = getLocalStorageData();
+
+    if(localStorageData){
+        for(let i = 0; i < localStorageData.length; i++){
+            createNewNoteCard(notesBox, localStorageData[i].noteTitle, localStorageData[i].noteContent);
+        }
+    }
+
     //Adding functionality to the submit-btn
     const submitBtn = inputField.querySelector('#submit-btn');
     submitBtn.addEventListener('click', function (event) {
         event.preventDefault();
+        
         const notesTitleInput = inputField.querySelector('#titleInput');
         const notesContentInput = inputField.querySelector('#contentInput');
 
         const notesTitle = notesTitleInput.value;
         const notesContent = notesContentInput.value;
 
-        if (notesTitle !== '' && notesContent !== '') {
-            const notesCard = document.createElement('div');
-            notesCard.className = 'notesCard';
-            notesCard.innerHTML = `
-            <h3>${notesTitle}</h3>
-            <p>${notesContent}</p>
-            <div class="btn-controls">
-                <i class="fa-solid fa-trash removeBtn"></i>
-                <i class="fa-solid fa-pen-to-square editBtn"></i>
-            </div>
-                `
+        if(notesTitle !== '' && notesContent !== ''){
+            createNewNoteCard(notesBox, notesTitle, notesContent);
+            addNoteToLocal({"noteTitle": notesTitle, "noteContent": notesContent});
 
-            const removeBtn = notesCard.querySelector('.removeBtn');
-            const editBtn = notesCard.querySelector('.editBtn');
-
-            removeBtn.addEventListener('click', function () {
-                const targetElement = (removeBtn.parentElement).parentElement;
-                notesBox.removeChild(targetElement);
-
-                editBtn.addEventListener('click', function () {
-                    const newTitle = prompt('Enter the new title : ');
-                    const newContent = prompt('Enter the new content : ');
-
-                    const title = notesCard.querySelector('h3');
-                    const content = notesCard.querySelector('p');
-
-                    title.textContent = newTitle;
-                    content.textContent = newContent;
-                    let InputStatus = checkValues([title, content], ['Enter the new title', 'Enter the new content'], 'Values cannot be null.');
-
-                    if (InputStatus === 1) {
-                        const targetElement = (removeBtn.parentElement).parentElement;
-                        notesBox.removeChild(targetElement);
-                    }
-                })
-            })
-
-            notesBox.appendChild(notesCard);
             notesTitleInput.value = '';
             notesContentInput.value = '';
-            
+
             if(errorStatus === 1){
                 inputField.removeChild(errorElement);
                 errorStatus = 0;
             }
-        }
+        }        
         else {
             if(errorStatus === 0){
                 console.error('Error : Values cannot be null.');
