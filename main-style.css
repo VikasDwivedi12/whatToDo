@@ -1,0 +1,97 @@
+.notesInput{
+    text-align: center;
+}
+body{
+    height: 100%;
+}
+.btnStyle{
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: cornflowerblue;
+    color: white;
+}
+.btnStyle:hover{
+    transition: background-color 0.3s;
+    cursor: pointer;
+    background-color: rgb(75, 123, 212);
+}
+.notesInput input, textarea{
+    width: 50vw;
+    margin-bottom: 1rem;
+    resize: none;
+    padding: 0.5rem;
+    border: 1px solid cornflowerblue;
+    border-radius: 5px;
+}
+.todoInput{
+    text-align: center;
+}
+.todoInput input{
+    width: 40vw;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid cornflowerblue;
+}
+#error{
+    color: red;
+    font-size: small;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Styling the taskcards */
+
+.taskCard{
+    width: 50vw;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+.taskHolder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-container i{
+    padding: 0 0.5rem;
+    cursor: pointer;
+}
+
+/* Styling the notes card */
+.notesContainer{
+    padding: 2rem;
+    display: flex;
+}
+.newTaskCard{
+    width: 20vw;
+    height: 30vh;
+    background-color: rgb(191, 187, 195);
+    color: rgb(25, 29, 71);
+    border-radius: 5px;
+    margin: 1rem 1rem;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.newTaskCard .dataContainer{
+    height: 70%;
+}
+.newTaskCard .btn-controls {
+    display: flex;
+    margin-top: auto; /* Pushes the controls to the bottom */
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonControls i{
+    margin: 0 0.5rem;
+    cursor: pointer;
+}

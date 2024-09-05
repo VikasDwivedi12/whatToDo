@@ -1,168 +1,67 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 body{
-    height: 100%;
-    width: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-.title-container{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+.main-head{
     text-align: center;
-    padding: 1rem;
+    padding: 2rem;
 }
-.btn-controls{
-    padding: 1rem;
+.main-head h1{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-.btn-controls button{
-    margin: 0 1rem;
-    padding: 0.5rem 1rem;
-    background-color: rgb(218, 218, 199);
+.main-head button{
+    background-color: rgb(205, 205, 205);
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0.5rem;
 }
-.btn-controls button:hover{
-    transition: background-color 0.5s;
-    background-color: rgb(203, 203, 59);
+.main-head button:hover{
+    transition: background-color 0.2s ease-in;
+    background-color: rgb(208, 199, 123);
     cursor: pointer;
 }
-.greet-container{
-    background-color: rgb(235, 235, 172);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.title-head{
     text-align: center;
-    padding: 2rem 0;
-}
-.greet-container #heading{
-    font-weight: lighter;
-}
-.box-container{
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-}
-.boxes{
-    display: flex;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-.boxes .box{
-    width: 40vw;
+    background-color: rgb(246, 229, 188);
     padding: 1rem;
 }
-.box h2{
+.title-head h1{
     font-weight: lighter;
+}
+.about-display{
+    display: flex;
+    justify-content: center;
+}
+.container{
+    width: 40vw;
+    padding: 2rem;
+}
+.container h2{
+    font-weight: normal;
     margin-bottom: 0.5rem;
+}
+ul{
+    margin-top: 1rem;
 }
 ul li{
     list-style: none;
 }
 .footer{
-    text-align: center;
-    position: fixed;
     bottom: 0;
-    left: 0;
+    position: fixed;
+    display: block;
+    text-align: center;
     width: 100%;
-    padding: 10px 0;
+    padding: 1rem;
+}
+.footer h3{
+    font-weight: normal;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .footer p{
-    font-family:Verdana, Geneva, Tahoma, sans-serif
-}
-#pr-info{
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: smaller;
-}
-.functional{
-    text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-.input-styles input{
-    width: 40vw;
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid cornflowerblue;
-}
-.input-styles button{
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: none;
-    width: 5rem;
-    background-color: cornflowerblue;
-    color: cornsilk;
-}
-.taskCard{
-    min-width: 40vw;
-    background-color: rgb(191, 187, 195);
-    color: rgb(25, 29, 71);
-    padding: 2rem;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    margin: 1rem 0;
-    transition: background-color 0.5s;
-}
-.taskCard i{
-    cursor: pointer;
-}
-.taskContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.errorElement{
-    color: red;
-    margin: 1rem 0;
-}
-.notes-style input{
-    width: 50%;
-    margin-bottom: 1rem;
-    border: 1px solid cornflowerblue;
-    border-radius: 5px;
-    padding: 0.5rem;
-}
-.notes-style textarea{
-    padding: 0.5rem;
-    width: 50%;
-    height: 20vh;
-    margin-bottom: 0.5rem;
-    resize: none;
-    border: 1px solid cornflowerblue;
-    border-radius: 5px;
-}
-#submit-btn{
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: none;
-    background-color: cornflowerblue;
-    color: cornsilk;
-}
-#submit-btn:hover{
-    transition: background-color 0.5s;
-    background-color: rgb(74, 109, 173);
-    cursor: pointer;
-}
-.notesBox{
-    display: flex;
-}
-.notesCard{
-    width: 20vw;
-    height: 30vh;
-    background-color: rgb(191, 187, 195);
-    color: rgb(25, 29, 71);
-    border-radius: 5px;
-    margin: 1rem 1rem;
-    padding-top: 1rem;
-    display: flex;
-    flex-direction: column;
-}
-.notesCard .btn-controls{
-    display: flex;
-    margin-top: auto;
-    justify-content: center;
-}
-.btn-controls i{
-    margin: 0 0.5rem;
-    cursor: pointer;
+    font-size: 14px;
 }

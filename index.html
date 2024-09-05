@@ -6,60 +6,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="main-style.css">
     <title>Home | WhatToDo</title>
 </head>
 
 <body>
-    <div class="title-container">
+    <div class="main-head">
         <h1>WhatToDo</h1>
-        <div class="btn-controls">
-            <button id="notes-btn">Notes</button>
-            <button id="todo-btn">MyToDo</button>
+        <div class="btn-container">
+            <button id="notesBtn">Notes</button>
+            <button id="toDoBtn">To do List</button>
         </div>
     </div>
-    <div class="container">
-        <div class="greet-container">
-            <h1 id="heading">Welcome to WhatToDo</h1>
-            <p id="captions">The utility app for your daily needs.</p>
+    <div class="main-display">
+        <div class="title-head">
+            <h1>Welcome to WhatToDo</h1>
+            <p>The utility app for your daily needs.</p>
         </div>
-        <div class="box-container">
-            <div class="boxes">
-                <div class="box">
-                    <h2>Why use ToDos?</h2>
-                    <p>
-                        Using a todo app helps you stay organized, manage tasks efficiently, and boost productivity. It
-                        allows you to keep track of your responsibilities in one place, set priorities, and never miss
-                        deadlines. With features like reminders, task categorization, and progress tracking, a todo app
-                        simplifies your daily routine, reduces stress, and ensures you stay focused on what matters
-                        most.
-                    </p>
-                </div>
-                <div class="box">
-                    <h2>Features of WhatToDo</h2>
-                    <p>
-                        WhatToDo is designed to help you manage your life effortlessly. Here’s why you should make it
-                        your go-to tool: <br><br>
-                    <ul>
-                        <li>Streamline task management</li>
-                        <li>Efficient not taking</li>
-                        <li>Intuitive Interface</li>
-                        <li>Costumizable list</li>
-                        <li>Reminders and deadlines</li>
-                        <li>Security and Privacy</li>
-                        <li>Smart search and filters</li>
-                        <li>Regular updates and support</li>
-                    </ul>
-                    </p>
-                </div>
+        <div class="about-display">
+            <div class="container">
+                <h2>Why use ToDos?</h2>
+                <p>
+                    Using a todo app helps you stay organized, manage tasks efficiently, and boost productivity. It
+                    allows you to keep track of your responsibilities in one place, set priorities, and never miss
+                    deadlines. With features like reminders, task categorization, and progress tracking, a todo app
+                    simplifies your daily routine, reduces stress, and ensures you stay focused on what matters most.
+                </p>
+            </div>
+            <div class="container">
+                <h2>Features of WhatToDo</h2>
+                <p>
+                    WhatToDo is designed to help you manage your life effortlessly. Here’s why you should make it your
+                    go-to tool:
+                <ul>
+                    <li>Streamline task management</li>
+                    <li>Efficient note taking</li>
+                    <li>Intuitive Interface</li>
+                    <li>Costumizable list</li>
+                    <li>Reminders and deadlines</li>
+                    <li>Security and Privacy</li>
+                    <li>Smart search and filters</li>
+                    <li>Regular updates and support</li>
+                </ul>
+                </p>
             </div>
         </div>
         <div class="footer">
-            <p>Version 1</p>
-            <p id="pr-info">Ivkaski Productions 2024</p>
+            <h3>Version 2</h3>
+            <p>Ivkaski Productions 2024</p>
         </div>
     </div>
+    <script src="./main.js"></script>
+    <script src="./todo.js"></script>
     <script src="https://kit.fontawesome.com/cb02d685fd.js" crossorigin="anonymous"></script>
-    <script src="./script.js"></script>
 </body>
 
 </html>
